@@ -11,13 +11,13 @@ config = {
     # **os.environ,  # override loaded values with environment variables
 }
 
-# IBM GHE or public GH
+# GHE or public GH
 GHE = config.get("USE_GHE")
 
 if GHE:
-    PAT = config.get("IBM_PAT")
-    GH_URL = config.get("IBM_GH")
-    GH_API = config.get("IBM_API")
+    PAT = config.get("x_PAT")
+    GH_URL = config.get("x_GH")
+    GH_API = config.get("x_API")
 else:
     PAT = config.get("PAT")
     GH_URL = config.get("GH")
@@ -62,10 +62,10 @@ class RepoFinder():
                 "Accept": "application/vnd.github+json"
             }
 
-            search_url = f'https://api.github.ibm.com/search/repositories?q={self.query}&per_page={self.per_page}'
+            search_url = f'https://api.github.com/search/repositories?q={self.query}&per_page={self.per_page}'
             return requests.get(search_url, headers=headers)
         else:
-            return requests.get(f'https://api.github.ibm.com/search/repositories?q={self.query}&per_page={self.per_page}')
+            return requests.get(f'https://api.github.com/search/repositories?q={self.query}&per_page={self.per_page}')
 
     def retrieve_repos(self, response):
         # Parse the JSON response
